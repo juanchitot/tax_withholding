@@ -1,0 +1,82 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxDetail:
+  type: entity
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxDetailRepository
+  table: withholding_tax_detail
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    amount:
+      column: amount
+      type: decimal
+      precision: 12
+      scale: 2
+      options:
+        default: 0
+    taxableIncome:
+      column: taxable_income
+      type: decimal
+      precision: 12
+      scale: 2
+      options:
+        default: 0
+    type:
+      column: type
+      type: string
+      length: 10
+      nullable: false
+      options:
+        default: 'TAX'
+    status:
+      column: status
+      type: string
+      length: 20
+    rate:
+      column: rate
+      type: float
+      options:
+        default: 0
+    withholdedAt:
+      column: withholded_at
+      type: datetime
+      nullable: false
+      options:
+        default: CURRENT_TIMESTAMP
+    settlementDate:
+      column: settlement_date
+      type: datetime
+      nullable: false
+      options:
+        default: CURRENT_TIMESTAMP
+  manyToOne:
+    transaction:
+      targetEntity: GeoPagos\ApiBundle\Entity\Transaction
+      inversedBy: withholdingTaxDetails
+      cascade: [ "persist" ]
+      joinColumn:
+        name: transaction_id
+        referencedColumnName: id
+    concept:
+      targetEntity: GeoPagos\WithholdingTaxBundle\Entity\TaxConcept
+      inversedBy: taxDetails
+      joinColumn:
+        name: concept_id
+        referencedColumnName: id
+    withholdingTax:
+      targetEntity: WithholdingTax
+      fetch: LAZY
+      joinColumns:
+        withholding_tax_id:
+          referencedColumnName: id
+          nullable: true
+      orphanRemoval: false
+  oneToOne:
+    withholdingTaxLog:
+      targetEntity: WithholdingTaxLog
+      mappedBy: taxDetail
+
+

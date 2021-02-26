@@ -1,0 +1,63 @@
+<div class="col-sm-12 mt-1">
+    <strong class="text-muted">
+        {{ 'withholding_tax.v2.rules.info.rate_by_condition' | trans }}:
+    </strong>
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>{{ 'withholding_tax.v2.rules.info.condition' | trans }}</th>
+                <th class="text-center">{{ 'withholding_tax.v2.rules.info.taxable_amount_coefficient' | trans }}.</th>
+                <th class="text-center">{{ 'withholding_tax.v2.rules.info.minimum_amount' | trans }}</th>
+                <th class="text-center">{{ 'withholding_tax.v2.rules.info.type' | trans }}</th>
+                <th class="text-center">{{ 'withholding_tax.v2.rules.info.business_activity' | trans }}</th>
+                <th class="text-right">%</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for rateByConditionDto in ratesByCondition %}
+                {% if rateByConditionDto.rate > 0 %}
+                <tr>
+                    <td>
+                        {% if rateByConditionDto.condition | length %}
+                            {{ rateByConditionDto.condition | capitalize }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if rateByConditionDto.taxableAmountCoefficient | length %}
+                            {{ rateByConditionDto.taxableAmountCoefficient }}%
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if rateByConditionDto.minimumAmount > 0 %}
+                            {{ '$' ~ rateByConditionDto.minimumAmount }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if rateByConditionDto.paymentMethodType | length %}
+                            {{ rateByConditionDto.paymentMethodType | trans }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if rateByConditionDto.businessActivity | length %}
+                            {{ rateByConditionDto.businessActivity | capitalize }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="text-right"><strong>{{ rateByConditionDto.rate }}%</strong></td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

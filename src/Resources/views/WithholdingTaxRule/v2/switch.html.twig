@@ -1,0 +1,17 @@
+{% if is_new_section %}
+    {% set switch_state = 'value="1" checked="checked"' %}
+{% else %}
+    {% set switch_state = 'value="0"' %}
+{% endif %}
+
+<div class="same-height-as-switch">
+    <span>{{ 'withholding_tax.v2.rules.new_ui' | trans }}:</span>
+    <label class="switch switch-primary">
+        <input id="section-switch" type="checkbox" class="switch-input" {{ switch_state }}
+               data-href-on="{{ path('withholding_tax_rule_backoffice_section_v2') }}"
+               data-href-off="{{ path('withholding_tax_rule_backoffice_section') }}">
+        <span class="switch-label" data-on="{{ 'withholding_tax.v2.rules.new_ui_yes' | trans }}"
+              data-off="{{ 'withholding_tax.v2.rules.new_ui_no' | trans }}"></span>
+        <span class="switch-handle"></span>
+    </label>
+</div>

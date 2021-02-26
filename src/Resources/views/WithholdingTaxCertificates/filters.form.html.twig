@@ -1,0 +1,13 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
+<div class="row">
+    <div class="col-md-3">{{ form_row(form.periodFrom) }}</div>
+    <div class="col-md-3">{{ form_row(form.periodTo) }}</div>
+    <div class="col-md-4">{{ form_row(form.taxType) }}</div>
+    <div class="col-md-2 text-right" style="margin-top: 27px;">
+        <button type="button" id="search-btn" name="apply_filters" class="btn btn-primary">
+            <i class="fa fa-search"></i>
+            {{ 'common.search'|trans }}
+        </button>
+    </div>
+</div>
+{{ form_end(form) }}

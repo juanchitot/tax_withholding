@@ -1,0 +1,41 @@
+<div class="col-sm-12 mt-1">
+    <strong class="text-muted">
+        {{ 'withholding_tax.v2.rules.info.rate_by_category' | trans }}:
+    </strong>
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>{{ 'withholding_tax.v2.rules.info.category' | trans }}</th>
+                <th class="text-center">{{ 'withholding_tax.v2.rules.info.taxable_amount_coefficient' | trans }}</th>
+                <th class="text-center">{{ 'withholding_tax.v2.rules.info.minimum_amount' | trans }}</th>
+                <th class="text-right">%</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for rateByCategoryDto in ratesByCategory %}
+                {% if rateByCategoryDto.rate > 0 %}
+                <tr>
+                    <td>{{ rateByCategoryDto.category | capitalize }}</td>
+                    <td class="text-center">
+                        {% if rateByCategoryDto.taxableAmountCoefficient | length %}
+                            {{ rateByCategoryDto.taxableAmountCoefficient }}%
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if rateByCategoryDto.minimumAmount > 0 %}
+                            {{ '$' ~ rateByCategoryDto.minimumAmount }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="text-right"><strong>{{ rateByCategoryDto.rate }}%</strong></td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

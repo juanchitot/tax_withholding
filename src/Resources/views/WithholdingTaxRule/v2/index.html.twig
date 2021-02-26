@@ -1,0 +1,62 @@
+{% extends 'GeoPagosCommonBackBundle:Layout:layout.html.twig' %}
+
+{% block page_stylesheets %}
+    {{ encore_entry_link_tags('withholding_tax_rule_css') }}
+{% endblock %}
+
+{% block content %}
+    {% include 'GeoPagosCommonBackBundle:Common:messages.html.twig' %}
+    <div class="container-fluid bg-white py-15px">
+        <!--- Title + Switch --->
+        <div class="row">
+            <div class="col-sm-8">
+                <h4 class="h4 mt-0">
+                    {{ 'withholding_tax.v2.rules.title' | trans }}:
+                </h4>
+            </div>
+            <div class="col-sm-4 text-right">
+                {{ include('@GeoPagosWithholdingTax/WithholdingTaxRule/v2/switch.html.twig', {'is_new_section': true}) }}
+            </div>
+        </div>
+        <!--- Filters --->
+        <div class="row no-gutter">
+            <div class="col-sm-12 mt-1">
+                {{
+                    include(
+                        '@GeoPagosWithholdingTax/WithholdingTaxRule/v2/filters.html.twig',
+                        {'enabledProvinces': enabledProvinces}
+                    )
+                }}
+            </div>
+        </div>
+        <hr class="mt-0">
+        <!--- Rules --->
+        <div class="row masonry" data-target=".panel" data-col-sm="6">
+            {% for ruleDto in rulesDto %}
+                {% if ruleDto.taxIsFederal %}
+                    {{
+                        include(
+                            '@GeoPagosWithholdingTax/WithholdingTaxRule/v2/federal.withholding.tax.rule.html.twig',
+                            {'ruleDto': ruleDto, 'columnWidth': 6}
+                        )
+                    }}
+                {% else %}
+                    {{
+                        include(
+                            '@GeoPagosWithholdingTax/WithholdingTaxRule/v2/province.withholding.tax.rule.html.twig',
+                            {'ruleDto': ruleDto, 'columnWidth': 6}
+                        )
+                    }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('masonry_js') }}
+    {{ encore_entry_script_tags('withholding_tax_rule_js') }}
+    {{ encore_entry_script_tags('withholding_tax_switch_js') }}
+{% endblock %}
+
+

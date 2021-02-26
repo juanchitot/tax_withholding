@@ -1,0 +1,248 @@
+modules:
+  withholding_tax_rule: Reglas de Retención
+  withholding_tax_simple_rule: Reglas de Retención simples
+  withholding_tax_dynamic_rule_province_rate: Reglas de Retencion Provinciales
+  withholding_tax: Retención de IIBB
+  withholding_tax_register_province: Padrones de IIBB
+  withholding_tax_register_micro_enterprise: Padron de Micro-empresas
+  withholding_tax_registry: Padrones Impositivos
+
+module_keys:
+  withholding_tax_register_province: Withholding Tax Register Province
+
+subsidiary:
+  WithholdingTaxNumber:
+    label: Número de II.BB.
+  withholdingTaxAttachment:
+    label: Archivo
+  withholdingTaxFile:
+    label: Descargar archivo soporte
+withholdingTaxDetail:
+  amount:
+    label: Importe retenido por II.BB.
+withholdingTaxExclusion:
+  dateFrom:
+    label: Desde
+  dateTo:
+    label: Hasta
+  attachment:
+    label: Archivo
+  file:
+    label: Descargar archivo de exclusion
+
+withholdingRaxRegisterProvince:
+  regime:
+    label: Regimen
+  origin:
+    label: Origen
+  province:
+    label: Provincia
+  dbFile:
+    label: Padrón
+  date:
+    label: Fecha
+  new:
+    success: Se subió correctamente el padrón "%name%"
+    error: Se produjo un error al subir el padrón "%name%"
+    title: Subir padrón
+  edit:
+    success: Se edito correctamente el padrón "%name%"
+    error: Se produjo un error al editar el padrón "%name%"
+    title: Edición - Subida padrón
+  view:
+    title: Vista padrón
+  errors:
+    DbFile:
+      not_blank: Debe subir un padrón.
+
+WithholdingTaxRegisterMicroEnterprise:
+  new:
+    success: Se subió correctamente el padrón "%name%"
+    error: Se produjo un error al subir el padrón "%name%"
+    title: Subir padrón Micro-Empresas
+  file:
+    label: Padrón
+
+TAX: IIBB
+VAT: IVA
+INCOME_TAX: Ganancias
+CREDIT: Credito
+DEBIT: Debito
+
+emails_builder:
+  withholding_tax_certificate:
+    subject: Comprobantes de Retenciones
+    label:
+      TAX: 'II. BB.'
+      VAT: 'IVA'
+      INCOME_TAX: 'GANANCIAS'
+      SIRTAC: 'SIRTAC'
+    filename:
+      TAX: 'comprobante-iibb.pdf'
+      VAT: 'comprobante-iva.pdf'
+      INCOME_TAX: 'comprobante-ganancias.pdf'
+
+withholding_tax:
+  rules:
+    index:
+      title: Reglas de Retención
+    menu:
+      rules: Regla
+      has_tax_registry: Usa Padrón
+      simple_rules: Reglas Simples
+      hard_rules: Reglas Duras
+      view_tax_registry: Ver Reglas Provinciales
+    form:
+      type: Impuesto
+      tax_category: Categoría IIBB
+      province: Provincia
+      has_tax_registry: Usa Padrón
+      unpublish_rate: '% sin Padrón'
+      minimum_amount_of_dynamic_rule: Monto mínimo con Padron
+      calculation_basis: Cálculo sobre
+      withhold_occasional: Retener Ocasionales
+      period: Periodo
+      download_date_db: Carga Padrón
+    new:
+      success: Se creó correctamente la regla "%name%"
+      error: Se produjo un error al crear la regla "%name%"%
+      title: Nueva Regla de retención
+    edit:
+      success: Se edito correctamente la regla "%name%"
+      error: Se produjo un error al editar la regla "%name%"%
+      title: Edición - Regla de retención
+    delete:
+      success: Se eliminó correctamente la regla "%name%"
+      error: Se produjo un error al eliminar la regla "%name%"
+  hard_rules:
+    index:
+      title: Listado Hard Rules
+    new:
+      success: Se creó correctamente el hard rules "%rate%"
+      error: Se produjo un error al crear el hard rules "%rate%"%
+      title: Nueva Hard Rules
+    edit:
+      success: Se edito correctamente el hard rules "%rate%"
+      error: Se produjo un error al editar el hard rules "%rate%"%
+      title: Edición - Hard Rules
+    delete:
+      success: Se eliminó correctamente el hard rules "%rate%"
+      error: Se produjo un error al eliminar el hard rules "%rate%"
+    form:
+      rate: Rate %
+      verification_date: Verification Date
+      rule: Rule
+  simple_rules:
+    index:
+      title: Reglas de Retención Simples
+    menu:
+      rules: Regla Simple
+    form:
+      type: Impuesto
+      tax_category: Categoría IIBB
+      province: Provincia
+      rate: Porcentaje
+      taxable_amount_coefficient: '% Base Imponible'
+      minimum_amount: Monto mínimo
+      classification: Rubro
+      tax_condition: IVA
+      income_tax: GANANCIAS
+      payment_method_type: Tipo
+    new:
+      success: Se creó correctamente la regla simple "%name%"
+      error: Se produjo un error al crear la regla simple "%name%"%
+      title: Nueva Regla simple de retención
+    edit:
+      success: Se edito correctamente la regla simple "%name%"
+      error: Se produjo un error al editar la regla simple "%name%"%
+      title: Edición - Regla simple de retención
+    delete:
+      success: Se eliminó correctamente la regla simple "%name%"
+      error: Se produjo un error al eliminar la regla simple "%name%"
+  dynamic_rule_province_rate:
+    index:
+      title: Clasificación provincial
+    menu:
+      rules: Regla Simple
+    form:
+      province: Provincia
+      rate: Porcentaje
+      external_id: Categorización
+    new:
+      success: Se creó correctamente la clasificación provincial "%name%"
+      error: Se produjo un error al crear la clasificación provincial "%name%"%
+      title: Nueva Regla de clasificación provincial
+    edit:
+      success: Se edito correctamente la clasificación provincial "%name%"
+      error: Se produjo un error al editar la clasificación provincial "%name%"%
+      title: Edición - Regla simple de clasificación provincial
+    delete:
+      success: Se eliminó correctamente la clasificación provincial "%name%"
+      error: Se produjo un error al eliminar la clasificación provincial "%name%"
+  certificates:
+    general:
+      title: Descargar Certificados
+    form:
+      period_from: Periodo Desde
+      period_to: Periodo Hasta
+      tax_type: Tipo de Impuesto
+      filter: Filter
+    table:
+      period: Periodo
+      tax_type: Tipo de Impuesto
+      province: Provincia
+      filename: Archivo
+      state: Estado
+      download_zip: Descargar ZIP
+    zip:
+      base_name: Certificados
+    statuses:
+      created: Creado
+      sent: Enviado
+      failed: Fallado
+
+  export:
+    index:
+      title: Exportador / Importador de Reglas
+    form:
+      file: Archivo de reglas
+    download: Descargar reglas actuales
+    upload: Subir nuevas set de reglas
+    cancel: Cancelar
+    error: No se pudo procesar el archivo.
+    success: Importación exitosa.
+
+  v2:
+    rules:
+      title: Listado de reglas activas
+      new_ui: Nueva interfaz
+      new_ui_yes: Si
+      new_ui_no: No
+      filters:
+        tax_type: Tipo de impuesto
+        tax_type_federal: Federal
+        tax_type_province: Provincial
+        tax_type_all: Todos
+        province: Provincia
+        province_all: Todas
+        search_criteria: Tipo de impuesto, nombre, provincia...
+      info:
+        yes: Si
+        no: No
+        calculation_basis: Base de calculo
+        has_tax_registry: Usa padrón
+        percentage_without_registry: '% sin padrón'
+        minimum_amount_with_registry: $ mín. padrón
+        rate_by_category: Alícuota según categoría
+        category: Categoría
+        taxable_amount_coefficient: Base imp.
+        minimum_amount: Monto mín.
+        rate_for_habituals: Alícuota según habitualidad
+        minimum_transactions: Trans. min.
+        limit: Límite
+        rate_by_condition: Alícuota según condición
+        condition: Condición
+        type: Tipo
+        business_activity: Rubro
+        excluded_categories: Categorias excluidas de retención
+        excluded_conditions: Condiciones excluidas de retención

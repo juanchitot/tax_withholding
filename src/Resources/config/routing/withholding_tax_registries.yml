@@ -1,0 +1,7 @@
+withholding_tax_register_province_backoffice_section:
+  resource: "@GeoPagosWithholdingTaxBundle/Resources/config/routing/withholding_tax_register_province.yml"
+  prefix: /province-register
+
+withholding_tax_register_micro_enterprise_backoffice_section:
+  resource: "@GeoPagosWithholdingTaxBundle/Resources/config/routing/withholding_tax_register_micro_enterprise.yml"
+  prefix: /micro-enterprise

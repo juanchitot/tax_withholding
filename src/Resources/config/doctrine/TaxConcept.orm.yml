@@ -1,0 +1,21 @@
+GeoPagos\WithholdingTaxBundle\Entity\TaxConcept:
+  type: entity
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\TaxConceptRepository
+  table: tax_concept
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    concept:
+      column: concept
+      type: string
+      nullable: false
+      length: 250
+  oneToMany:
+    taxDetails:
+      targetEntity: GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxDetail
+      mappedBy: concept

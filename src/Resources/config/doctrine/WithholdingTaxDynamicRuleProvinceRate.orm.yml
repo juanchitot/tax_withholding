@@ -1,0 +1,32 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxDynamicRuleProvinceRate:
+  type: entity
+  table: withholding_tax_dynamic_rule_province_rate
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxDynamicRuleProvinceRateRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    externalId:
+      column: external_id
+      type: string
+      nullable: true
+      length: 3
+      fixed: false
+    rate:
+      column: rate
+      type: string
+      nullable: true
+      length: 64
+      fixed: false
+  manyToOne:
+    province:
+      targetEntity:  GeoPagos\ApiBundle\Entity\Province
+      fetch: LAZY
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+      orphanRemoval: false

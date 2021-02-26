@@ -1,0 +1,52 @@
+/* Margin Utils */
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+.mt-0-5 {
+    margin-top: 0.5em !important;
+}
+
+.mt-1 {
+    margin-top: 1em !important;
+}
+
+/* Padding Utils */
+.py-8px {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+.py-15px {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.bg-white {
+    background: #ffffff !important;
+}
+
+/* Section */
+div.same-height-as-switch {
+    line-height: 26px;
+    vertical-align: middle;
+}
+
+.no-gutter > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.small-font {
+    font-size: 12px;
+}
+
+.small-font table.table-condensed th,
+.small-font table.table-condensed td {
+    padding: 5px !important;
+}
+
+.panel.panel-grey .panel-heading {
+    border-color: #e1e6ef !important;
+    background: #f2f4f8 !important;
+}

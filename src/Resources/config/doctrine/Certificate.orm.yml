@@ -1,0 +1,53 @@
+GeoPagos\WithholdingTaxBundle\Entity\Certificate:
+  type: entity
+  table: withholding_tax_certificate
+  uniqueConstraints:
+    subsidiary_certificate_date_idx:
+      columns: [ subsidiary_id, fileName , date_period ]
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    fileName:
+      type: string
+      nullable: false
+    period:
+      type: date
+      nullable: true
+      column: date_period
+    type:
+      type: string
+      length: 50
+      fixed: false
+      nullable: false
+    status:
+      type: string
+      length: 50
+      fixed: false
+      nullable: false
+    sequenceNumber:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: sequence_number
+  manyToOne:
+    subsidiary:
+      targetEntity: GeoPagos\ApiBundle\Entity\Subsidiary
+      cascade: [ "persist" ]
+      joinColumns:
+        subsidiary_id:
+          referencedColumnName: id
+    province:
+      targetEntity: GeoPagos\ApiBundle\Entity\Province
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+  oneToMany:
+    withholdingTaxes:
+      targetEntity: GeoPagos\WithholdingTaxBundle\Entity\WithholdingTax
+      mappedBy: certificate
+

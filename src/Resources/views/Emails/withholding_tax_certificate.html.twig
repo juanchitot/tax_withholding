@@ -1,0 +1,235 @@
+{% set subsidiary = withholdingTax.subsidiary %}
+{% set account = subsidiary.account %}
+{% set address = subsidiary.address %}
+{% set province = address.province %}
+{% set col_pct_width = showPaymentType ? 17 : (showRate ? 20 : 25) %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Certificado</title>
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"
+      style="font-family:Arial; box-sizing: border-box;padding:20px; -webkit-font-smoothing: antialiased;-webkit-text-size-adjust: none;height: 100%;margin: 0;width: 100%!important;">
+<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="backgroundTable1"
+       style="border-spacing: 16px;margin: 0;padding: 0;width: 100% !important;">
+    <tr>
+        <td align="left" style="width: 50%">
+            <p style="font-size: 24px;font-weight: 600;color: #231f20;">
+                CONSTANCIA DE RETENCIÓN {{ withholding_label }}
+                <br>
+                <b style="font-size: 16px;color: #231f20;">
+                    {{ provinceWithholdingTaxSetting.resolution }}</b>
+            </p>
+        </td>
+        <td align="right" style="width: 50%">
+            {% if show_certificate_number %}
+            <div style="margin-right:16px; padding: 16px 26px; border:solid 1px #cacaca; border-radius: 8px; display: inline-block; position: relative;" >
+                <label style="padding: 0 10px;position: absolute; color:#999999; top: -7px; left:12px; background-color:#fff;font-size: 10px;">Nro.
+                    Constancia</label>
+                <span style="color:{{ theme.colors.secondary }}; font-size: 16px;font-weight: bold" class="receipt-number">
+                    {% if taxType == 'SIRTAC' %}
+                    {{ "%06d"| format(certificate.sequenceNumber) }}
+                    {% else %}
+                    {{ withholdingTax.certificateNumber|strpadLeft(12,'0') }}
+                    {% endif %}
+                </span>
+            </div>
+            {% endif %}
+            <div style="padding: 16px 36px; border:solid 1px #cacaca; border-radius: 8px; display: inline-block; position: relative;">
+                <label style="padding: 0 5px;position: absolute; color:#999999; top: -7px; left:15px; background-color:#fff;font-size: 10px;">Fecha
+                    de emisión</label>
+                <span>{{ "now"|date('d/m/Y') }}</span>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<table style="border-spacing: 16px 0; width: 100%" class="withhold-header">
+    <tr>
+        <td style="width: 50%;border: solid 1px #cacaca;border-radius: 8px;padding: 16px 0;position: relative;">
+            <label style="padding: 0 10px;position: absolute; color:#999999; top: -5px; left:15px; background-color:#fff;font-size: 10px;">
+                Sujeto retenido
+            </label>
+            <div style="box-sizing: border-box;padding: 0 26px; width:100%; position: relative;">
+
+                <table style="width: 100%;">
+                    <tr>
+                        <td align="left" style="vertical-align: top;max-width: 174px; ">
+                            <p style="color:#231f20; margin:0; text-transform: uppercase; font-size: 11px; display:inline-block;">
+                                {{ account.legalName }}
+                                <br>
+                                {{ address.street ~ ' ' ~ address.number ~ ' ' ~ address.apartment ~ ' cp ' ~ address.postalCode }}
+                                <br>
+                                {{ address.city ? address.city.name : '' }}
+                            </p>
+                        </td>
+                        <td align="right" style="vertical-align: top; ">
+                            <table style="font-size: 11px;color:#231f20;">
+                                <tr>
+                                    <td><b>CUIT</b>:</td>
+                                    <td>
+                                        {{ account.idFiscal|formatCuit }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cond. II.BB</b>:</td>
+                                    <td>{{ subsidiary.TaxCategory.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Ing. Brutos</b>:</td>
+                                    <td>{{ subsidiary.withholdingTaxNumber }}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </td>
+        <td style="border: solid 1px #cacaca;border-radius: 8px;padding: 16px 0;position: relative;">
+            <label style="min-width: 102px;padding: 0 10px;position: absolute; color:#999999; top: -5px; left:15px; background-color:#fff;font-size: 10px;">
+              Agente&nbsp;de&nbsp;retención
+            </label>
+            <div style="box-sizing: border-box;padding: 0 26px; width:100%; position: relative;">
+                <table style="width: 100%; ">
+                    <tr>
+                        <td align="left" style="vertical-align: top;max-width: 174px;">
+                            <p style="color:#231f20; margin:0; text-transform: uppercase; font-size: 11px; display:inline-block;">
+                                {{ companyName }}
+                                <br>
+                                {{ companyAddress }}
+                                <br>
+                                {{ location }} - {{ zipCode }}
+                            </p>
+                        </td>
+                        <td align="right" style="vertical-align: top;">
+                            <table style="font-size: 11px;color:#231f20;">
+                                <tr>
+                                    <td><b>CUIT</b>:</td>
+                                    <td>{{ companyFiscalId }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 60%;"><b>Número de Agente</b>:</td>
+                                    <td>{{ provinceWithholdingTaxSetting.number }}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </td>
+    </tr>
+</table>
+
+<table style="border-spacing: 16px 0;width: 100%;">
+    <tr>
+        <td>
+            <table class="withhold-detail" style="border-spacing: 0;width: 100%;min-height: 250px;margin-top: 16px;text-align: center;">
+                <tr>
+                    <td style="height: 16px;border-radius: 8px 0 0 0;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                                <span style="color:{{ theme.colors.primary }};font-size: 11px;font-weight: bold">
+                                    Fecha de retención
+                                </span>
+                    </td>
+                    <td style="height: 16px;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                                <span style="color:{{ theme.colors.primary }};font-size: 11px;font-weight: bold">
+                                    Nro. Liquidación
+                                </span>
+                    </td>
+                    {% if showRate %}
+                        <td style="height: 16px;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                                    <span style="color:{{ theme.colors.primary }};font-size: 11px;font-weight: bold">
+                                        Alícuota
+                                    </span>
+                        </td>
+                    {% endif %}
+                    {% if showPaymentType %}
+                        <td style="height: 16px;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                                <span style="color:{{ theme.colors.primary }};font-size: 11px;font-weight: bold">
+                                    Tipo de método de pago
+                                </span>
+                        </td>
+                    {% endif %}
+                    <td style="height: 16px;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                                <span style="color:{{ theme.colors.primary }};font-size: 11px;font-weight: bold">
+                                    Base imponible
+                                </span>
+                    </td>
+                    <td style="height: 16px;border-radius:0 8px  0 0;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                                <span style="color:{{ theme.colors.primary }};font-size: 11px;font-weight: bold">
+                                    Importe de retención
+                                </span>
+                    </td>
+                </tr>
+                {% for detail in withholdingTaxLines %}
+                    <tr class="withhold-row">
+                        <td style="vertical-align:top;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                            {{ detail.date|date('d/m/Y') }}
+                        </td>
+                        <td style="vertical-align:top;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                            {{ detail.certificateNumber|strpadLeft(12,'0') }}
+                        </td>
+                        {% if showRate %}
+                            <td style="vertical-align:top;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                                {{ detail.rate }}%
+                            </td>
+                        {% endif %}
+                        {% if showPaymentType %}
+                            <td style="vertical-align:top;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                                {% if detail.paymentType == 'DEBIT' %}
+                                    Débito
+                                {% elseif detail.paymentType == 'CREDIT'  %}
+                                    Crédito
+                                {% elseif detail.paymentType == 'ALL'  %}
+                                    Todos
+                                {% else  %}
+                                    {{ detail.paymentType }}
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                        <td style="vertical-align:top;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                            {{ detail.taxableIncome|formatMoney }}
+                        </td>
+                        <td style="vertical-align:top;width:{{ col_pct_width }}%; border: solid 1px #cacaca; padding: 16px 22px">
+                            {{ detail.amount|formatMoney }}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                <tr>
+                    <td colspan="{{ (showRate and showPaymentType) ? 5 : ((showRate or showPaymentType) ? 4 : 3) }}" align="right">
+                        <span style="font-size:20px;color:{{ theme.colors.primary }};font-size: 16px;font-weight: bold">Total retenido: </span>
+                    </td>
+                    <td colspan="1" style="height: 11px;">
+                        <span style="border-radius: 8px;background-color:{{ theme.colors.primary }}; color:#fff;display: block;padding: 15px 0;margin: 10px 0;font-weight: bold">{{ withholdingTaxAmount|formatMoney }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" colspan="5">
+                        {% if show_sign %}
+                        <p style="font-size: 11px;margin-top: 0px; text-align: center">
+                            <img src="{{ signCertificateUrl }}"
+                                 alt="firma" style="height: 83px;">
+                            <br>
+                            __________________________
+                            <br>
+                            {{ signCertificateName }}
+                            <br>
+                            DNI: {{ signCertificateFiscalId }}
+                            <br>
+                            {{ companyName }}
+                        </p>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

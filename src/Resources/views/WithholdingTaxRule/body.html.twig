@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        {{ form_row(form.type) }}
+        {{ form_row(form.province) }}
+
+        {{ form_row(form.has_tax_registry) }}
+        {{ form_row(form.unpublish_rate) }}
+        {{ form_row(form.minimumDynamicRuleAmount) }}
+
+        {{ form_row(form.calculation_basis) }}
+        {{ form_row(form.withhold_occasional) }}
+
+        {{ form_row(form.period) }}
+
+        {% include '@GeoPagosWithholdingTax/WithholdingTaxRule/readonly_row.html.twig' with {
+            'label':'DownloadDateDB',
+            'value':withholdingTaxRule.downloadDateDb
+        } %}
+    </div>
+</div>

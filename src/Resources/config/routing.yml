@@ -1,0 +1,17 @@
+withholding_tax_registries_backoffice_section:
+  resource: "@GeoPagosWithholdingTaxBundle/Resources/config/routing/withholding_tax_registries.yml"
+  prefix: /withholding-tax-registries
+
+withholding_tax_rule_backoffice_section:
+  resource: "@GeoPagosWithholdingTaxBundle/Resources/config/routing/withholding_tax_rule.yml"
+  prefix: /withholding-tax-rule
+
+withholding_tax_certificates_section:
+  resource: "@GeoPagosWithholdingTaxBundle/Resources/config/routing/withholding_tax_certificates.yml"
+  prefix: /withholding-tax-certificates
+
+###################### V2 ######################
+
+withholding_tax_rule_backoffice_section_v2:
+  resource: "@GeoPagosWithholdingTaxBundle/Resources/config/routing/v2/withholding_tax_rule.yml"
+  prefix: /v2/withholding-tax-rule

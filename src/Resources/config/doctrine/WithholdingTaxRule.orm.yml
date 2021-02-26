@@ -1,0 +1,99 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxRule:
+  type: entity
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxRuleRepository
+  table: withholding_tax_rule
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    type:
+      column: type
+      type: string
+      nullable: false
+      length: 10
+      options:
+        default: 'TAX'
+    rate:
+      column: rate
+      type: decimal
+      nullable: true
+      precision: 6
+      scale: 4
+      options:
+        default: 0
+    unpublishRate:
+      column: unpublish_rate
+      type: decimal
+      nullable: true
+      precision: 3
+      scale: 2
+      options:
+        default: 0
+    minimumDynamicRuleAmount:
+      column: minimum_amount
+      type: decimal
+      nullable: true
+      precision: 10
+      scale: 2
+      options:
+        default: 0
+    calculationBasis:
+      column: calculation_basis
+      type: string
+      nullable: true
+      length: 64
+      fixed: false
+    withholdOccasional:
+      column: withhold_occasional
+      type: integer
+      options:
+        default: 0
+    hasTaxRegistry:
+      column: has_tax_registry
+      type: boolean
+      options:
+        default: false
+    period:
+      column: period
+      type: string
+      length: 250
+      fixed: false
+      options:
+        default: "This Month"
+    downloadDateDb:
+      column: download_date_db
+      type: datetime
+      nullable: true
+    enabled:
+      column: is_enabled
+      type: boolean
+      options:
+        default: false
+    modifiedAt:
+      type: datetime
+      nullable: true
+      column: modified_at
+    createdAt:
+      type: datetime
+      nullable: true
+      column: created_at
+  manyToOne:
+    taxCategory:
+      targetEntity: GeoPagos\ApiBundle\Entity\TaxCategory
+      fetch: LAZY
+      joinColumns:
+        tax_category_id:
+          referencedColumnName: id
+          nullable: false
+      orphanRemoval: false
+    province:
+      targetEntity:  GeoPagos\ApiBundle\Entity\Province
+      fetch: LAZY
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+      orphanRemoval: false

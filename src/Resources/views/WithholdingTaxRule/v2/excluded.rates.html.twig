@@ -1,0 +1,14 @@
+<div class="col-sm-12 mt-1">
+    <strong class="text-muted">
+        {% if isFederal %}
+            {{ 'withholding_tax.v2.rules.info.excluded_conditions' | trans }}:
+        {% else %}
+            {{ 'withholding_tax.v2.rules.info.excluded_categories' | trans }}:
+        {% endif %}
+    </strong>
+</div>
+<div class="col-sm-12 mt-1">
+    {% for excludedRate in excludedRates %}
+        {{ excludedRate.name | capitalize }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+</div>

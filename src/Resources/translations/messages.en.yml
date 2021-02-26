@@ -1,0 +1,242 @@
+modules:
+  withholding_tax_rule: Withhold Rules
+  withholding_tax_simple_rule: Withhold Simple Rules
+  withholding_tax_dynamic_rule_province_rate: Withhold Province rules
+  withholding_tax_register_province: Withholding Tax Registries
+
+module_keys:
+  withholding_tax_register_province: Withholding Tax Register Province
+
+subsidiary:
+  sections:
+    withholdingTax: Gross Income
+    withholdingTaxExclusion: Gross Income Exclusion
+  WithholdingTaxNumber:
+    label: II.BB. number
+  withholdingTaxAttachment:
+    label: File
+  withholdingTaxFile:
+    label: Download support file
+withholdingTaxDetail:
+  amount:
+    label: Amount withheld by II.BB.
+withholdingTaxExclusion:
+  dateFrom:
+    label: From
+  dateTo:
+    label: To
+  attachment:
+    label: File
+  file:
+    label: Download exclusion file
+
+withholdingRaxRegisterProvince:
+  province:
+    label: Province
+  dbFile:
+    label: File
+  date:
+    label: Date
+  new:
+    success: Tax register was created successfully
+    error: An error ocurred while creating tax register
+    title: Upload tax register
+  edit:
+    success: The tax register  was successfully updated
+    error:  An error occurred while updating the tax register
+    title: Edit - tax register
+  view:
+    title: Tax Register
+  errors:
+    DbFile:
+      not_blank:  upload a file.
+
+WithholdingTaxRegisterMicroEnterprise:
+  new:
+    success: Tax register was created successfully
+    error: An error ocurred while creating tax register
+    title: Upload tax register
+  file:
+    label: File
+
+
+TAX: IIBB
+VAT: IVA
+INCOME_TAX: Ganancias
+CREDIT: Credit
+DEBIT: Debit
+
+emails_builder:
+  withholding_tax_certificate:
+    subject: Proof of IIBB
+    label:
+      TAX: 'II. BB.'
+      VAT: 'IVA'
+      INCOME_TAX: 'GANANCIAS'
+      SIRTAC: 'SIRTAC'
+    filename:
+      TAX: 'receipt-iibb.pdf'
+      VAT: 'receipt-iva.pdf'
+      INCOME_TAX: 'receipt-ganancias.pdf'
+
+withholding_tax:
+  rules:
+    index:
+      title: Withhold Rules
+    menu:
+      rules: Rules
+      has_tax_registry: Has Tax Registry
+      simple_rules: Simple Rules
+      hard_rules: Hard Rules
+      view_tax_registry: View Province Rules
+    form:
+      type: Tax
+      tax_category: IIBB Category
+      province: Province
+      has_tax_registry: Has tax Registry
+      unpublish_rate: Unpublish Rate
+      minimum_amount_of_dynamic_rule: Minimum Amount of Tax Registry
+      calculation_basis: Calculation Basis
+      withhold_occasional: Withhold occasional
+      period: Period
+      download_date_db: File date
+    new:
+      success: Rule "%name%" was created successfully
+      error: An error ocurred while creating rule
+      title: New Rule
+    edit:
+      success: The rule "%name%"  was successfully updated
+      error: An error occurred while updating the rule "%name%"%
+      title: Rule - Edit
+    delete:
+      success: The rule "%name%" was successfully deleted
+      error: An error occurred while deleting the rule "%name%"
+  hard_rules:
+    index:
+      title: Hard Rules
+    new:
+      success: Hard rule "%rule%" was created successfully
+      error: An error ocurred while creating hard rule
+      title: New Hard Rules
+    edit:
+      success:  Hard rule "%rule%" was successfully updated
+      error: An error occurred while updating the hard rules "%rule%"
+      title: Edit - Hard Rules
+    delete:
+      success: The "%rule%" hard rule was successfully deleted.
+      error: An error occurred while deleting the hard rules "%rule%"
+    form:
+      rate: Rate %
+      verification_date: Verification Date
+      rule: Rule
+  simple_rules:
+    index:
+      title: Withhold Simple Rules
+    menu:
+      rules: Rule
+      hard_rules: Hard rules
+    form:
+      type: Tax
+      tax_category: IIBB Category
+      province: Province
+      rate: Rate
+      taxable_amount_coefficient: '% Taxable Amount'
+      minimum_amount: Minimum Amount
+      calculation_basis: Calculation Basis
+      withhold_occasional: Withhold occasional
+      period: Period
+      download_date_db: File date
+    new:
+      success: Rule "%name%" was created successfully
+      error: An error ocurred while creating rule
+      title: New Rule
+    edit:
+      success: The rule "%name%"  was successfully updated
+      error: An error occurred while updating the rule "%name%"
+      title: Rule - Edit
+    delete:
+      success: The rule "%name%" was successfully deleted
+      error: An error occurred while deleting the rule "%name%"
+  dynamic_rule_province_rate:
+    index:
+      title: province categorization
+    form:
+      province: Province
+      rate: Rate
+      external_id: Category
+    new:
+      success: The province categorization "%name%" was successfully created
+      error: An error occurred while creating the province categorization "%name%"
+      title: New province categorization
+    edit:
+      success: The %name% province categorization was successfully updated
+      error: An error occurred while updating the province categorization
+      title: Edit province categorization
+    delete:
+      success: The "%name%" province categorization  was successfully deleted
+      error: An error occurred while deleting the province categorization
+  certificates:
+    general:
+      title: Download Certificates
+    form:
+      period_from: Period From
+      period_to: Period To
+      tax_type: Tax type
+      filter: Filter
+    table:
+      period: Period
+      tax_type: Tax Type
+      province: Province
+      filename: Filename
+      state: State
+      download_zip: Download ZIP
+    zip:
+      base_name: Certificates
+    statuses:
+      created: Created
+      sent: Sent
+      failed: Failed
+
+  export:
+    index:
+      title: Rule Importer/Exporter
+    form:
+      file: Rule file
+    download: Download actual rules
+    upload: Upload rules
+    cancel: Cancel
+    error: Couldn't process file.
+    success: Import success.
+
+  v2:
+    rules:
+      title: Active rules list
+      new_ui: Newest interface
+      filters:
+        tax_type: Tax type
+        tax_type_federal: Federal
+        tax_type_province: Province
+        tax_type_all: All
+        province: Province
+        province_all: All
+        search_criteria: Tax type, name, province...
+      info:
+        yes: Yes
+        no: No
+        calculation_basis: Calculation basis
+        has_tax_registry: Has tax registry
+        percentage_without_registry: '% w/o registry'
+        minimum_amount_with_registry: Registry min. $
+        rate_by_category: Rate by category
+        category: Category
+        taxable_amount_coefficient: Tax. amount
+        minimum_amount: Min. amount
+        rate_for_habituals: Rate for habituals
+        minimum_transactions: Min. trx
+        limit: Limit
+        rate_by_condition: Rate by condition
+        condition: Condition
+        type: Type
+        business_activity: Bus. Activity
+        excluded_categories: Categories excluded from withholding
+        excluded_conditions: Conditions excluded from withholding

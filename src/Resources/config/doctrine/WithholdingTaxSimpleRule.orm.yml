@@ -1,0 +1,93 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxSimpleRule:
+  type: entity
+  table: withholding_tax_simple_rule
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxSimpleRuleRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    type:
+      column: type
+      type: string
+      nullable: false
+      length: 10
+      options:
+        default: 'TAX'
+    rate:
+      column: rate
+      type: decimal
+      precision: 6
+      scale: 2
+      options:
+        default: 0
+    minimunAmount:
+      column: minimum_amount
+      type: decimal
+      precision: 6
+      scale: 2
+      options:
+        default: 0
+    createdAt:
+      type: datetime
+      nullable: true
+      column: created_at
+    paymentMethodType:
+      column: payment_method_type
+      type: string
+      nullable: true
+      length: 6
+      fixed: false
+    incomeTax:
+      column: income_tax
+      type: string
+      nullable: false
+      length: 2
+      options:
+        default: 'NI'
+    taxableAmountCoefficient:
+      column: taxable_amount_coefficient
+      type: decimal
+      precision: 6
+      scale: 2
+      options:
+        default: 1
+  manyToOne:
+    province:
+      targetEntity:  GeoPagos\ApiBundle\Entity\Province
+      fetch: LAZY
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+      orphanRemoval: false
+    taxCategory:
+      targetEntity:  GeoPagos\ApiBundle\Entity\TaxCategory
+      fetch: LAZY
+      joinColumns:
+        tax_category_id:
+          referencedColumnName: id
+      orphanRemoval: false
+    classification:
+      targetEntity:  GeoPagos\ApiBundle\Entity\Classification
+      fetch: LAZY
+      joinColumns:
+        classification_id:
+          referencedColumnName: id
+      orphanRemoval: false
+    taxCondition:
+      targetEntity:  GeoPagos\ApiBundle\Entity\TaxCondition
+      fetch: LAZY
+      joinColumns:
+        tax_condition_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  oneToOne:
+    provincesGroup:
+      targetEntity: GeoPagos\WithholdingTaxBundle\Entity\TaxRuleProvincesGroup
+      joinColumn:
+        nullable: true
+        name: provinces_group_id
+        referencedColumnName: id

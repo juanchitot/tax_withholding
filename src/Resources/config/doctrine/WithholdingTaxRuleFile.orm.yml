@@ -1,0 +1,62 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxRuleFile:
+  type: entity
+  table: withholding_tax_rule_file
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxRuleFileRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    dbFile:
+      type: string
+      nullable: true
+      length: 255
+      options:
+        fixed: false
+      column: db_file
+    date:
+      type: string
+      length: 7
+      nullable: true
+      column: date
+    status:
+      type: string
+      length: null
+      fixed: false
+      nullable: false
+      columnDefinition: "ENUM ('PENDING','SUCCESS','FAILED')"
+      options:
+        default: 'PENDING'
+      column: status
+    createdAt:
+      type: datetime
+      nullable: true
+      column: created_at
+    modifiedAt:
+      type: datetime
+      nullable: true
+      column: modified_at
+    deletedAt:
+      type: datetime
+      nullable: true
+      column: deleted_at
+    imported:
+      type: bigint
+      nullable: true
+      options:
+        default: 0
+      column: imported
+    fileType:
+      type: smallint
+      nullable: false
+      column: file_type
+  manyToOne:
+    province:
+      targetEntity:  GeoPagos\ApiBundle\Entity\Province
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+      orphanRemoval: false

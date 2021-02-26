@@ -1,0 +1,76 @@
+{% extends 'GeoPagosCommonBackBundle:Layout:layout.html.twig' %}
+{% block content %}
+    {% include 'GeoPagosWithholdingTaxBundle:WithholdingTaxRule:menu.html.twig' %}
+    {% include 'GeoPagosCommonBackBundle:Common:messages.html.twig' %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" data-original-title>
+                    <h2><i class="fa fa-square"></i><span class="break"></span>{{ 'withholding_tax.dynamic_rule_province_rate.index.title'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="row panel-body">
+                        {% if authorizer.isAuthorize('withholding_tax_dynamic_rule_province_rate.create') %}
+                            <div class="col-lg-3" style="float: right;margin-right: -15px;">
+                                <a href="{{ path('common_back_withholding_tax_dynamic_rule_province_rate_new', {'withholdingTaxRuleId': withholdingTaxRule.id}) }}"
+                                   class="btn btn-success btn-block">{{ 'common.create' | trans }} {{ 'withholding_tax.dynamic_rule_province_rate.index.title'|trans }}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <table id="rule_datatable" class="table table-striped table-bordered bootstrap-datatable">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>{{ 'withholding_tax.dynamic_rule_province_rate.form.province'|trans }}</th>
+                            <th>{{ 'withholding_tax.dynamic_rule_province_rate.form.external_id'|trans }}</th>
+                            <th>{{ 'withholding_tax.dynamic_rule_province_rate.form.rate'|trans }}</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for rule in dynamic_rules_province_rates %}
+                            {% set rule_url = path('common_back_withholding_tax_dynamic_rule_province_rate_edit', {'dynamicRuleProvinceRateId':rule.id, 'withholdingTaxRuleId': withholdingTaxRule.id}) %}
+                            <tr>
+                                <td>{{ rule.id }}</td>
+                                <td><a href="{{ rule_url }}">{{ rule.province.name }}</a></td>
+                                <td>{{ rule.externalId }}</td>
+                                <td>{{ rule.rate | default('-') }}%</td>
+                                <td>
+                                    {% if authorizer.isAuthorize('withholding_tax_simple_rule.edit') %}
+                                        <a class="btn btn-info btn-xs" title="{{ 'Editar'|trans }}" href="{{ rule_url }}">
+                                            <i class="fa fa-edit "></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if authorizer.isAuthorize('withholding_tax_simple_rules.delete') %}
+                                        <a class="btn btn-danger btn-xs delete-button" title="{{ 'Eliminar'|trans }}"
+                                           href="{{ path('common_back_withholding_tax_dynamic_rule_province_rate_delete', {'dynamicRuleProvinceRateId':rule.id, 'withholdingTaxRuleId': withholdingTaxRule.id}) }}">
+                                            <i class="fa fa-trash-alt"></i>
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!--/col-->
+
+    </div><!--/row-->
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $('#rule_datatable').dataTable({
+                "pageLength": 50,
+                "bFilter": false,
+                "oLanguage": {
+                    "sUrl": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                },
+            });
+        });
+    </script>
+{% endblock %}

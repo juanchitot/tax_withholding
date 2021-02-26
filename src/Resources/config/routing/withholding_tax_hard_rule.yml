@@ -1,0 +1,15 @@
+common_back_withholding_tax_hard_rule:
+  path: /
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxHardRule:index
+
+common_back_withholding_tax_hard_rule_new:
+  path: /new
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxHardRule:new
+
+common_back_withholding_tax_hard_rule_edit:
+  path: /{withholdingTaxHardRuleId}
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxHardRule:edit
+
+common_back_withholding_tax_hard_rule_delete:
+  path: /{withholdingTaxHardRuleId}/delete
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxHardRule:delete

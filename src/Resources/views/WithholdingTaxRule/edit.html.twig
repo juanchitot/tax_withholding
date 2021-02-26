@@ -1,0 +1,41 @@
+{% extends 'GeoPagosCommonBackBundle:Layout:layout.html.twig' %}
+
+{% block page_stylesheets %}
+    <style type="text/css">
+        label[for*=merchant_type] {
+            padding-left: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% include 'GeoPagosWithholdingTaxBundle:WithholdingTaxRule:menu.html.twig' %}
+    {% include 'GeoPagosCommonBackBundle:Common:messages.html.twig' %}
+
+    {{ form_start(form, {
+        'action': path('withholding_tax_rule_backoffice_section_edit',{'withholdingTaxRuleId':withholdingTaxRule.id}),
+        'attr': {'class': 'form-horizontal', 'id': 'wt_rule'
+        }}) }}
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2><strong>{{ 'withholding_tax.rules.edit.title'|trans }}</strong></h2>
+                </div>
+
+                <div class="panel-body">
+                    {% include 'GeoPagosWithholdingTaxBundle:WithholdingTaxRule:body.html.twig' %}
+                </div>
+
+            </div>
+            {% include 'GeoPagosWithholdingTaxBundle:WithholdingTaxRule:edit_buttons.html.twig' with {
+                'submitLabel':'merchant.buttons.save.edit.title'|trans
+            } %}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

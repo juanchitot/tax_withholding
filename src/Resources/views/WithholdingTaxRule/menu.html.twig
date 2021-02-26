@@ -1,0 +1,68 @@
+<div class = "row">
+    <div class = "col-lg-12">
+        <div class = "panel panel-default">
+            <div class = "panel-body">
+                {% set route = app.request.attributes.get('_route') %}
+
+                <div class = "col-lg-2 col-md-2 col-xs-6">
+                    <a {% if route starts with 'withholding_tax_rule_backoffice_section_edit' %}
+                        class = "quick-button small merchant-menu-options selected"
+                    {% else %}
+                        class = "quick-button small merchant-menu-options "
+                    {% endif %}
+                            href = "{{ path('withholding_tax_rule_backoffice_section_edit',{'withholdingTaxRuleId':withholdingTaxRule.id}) }}">
+                        <i class = "fa fa-home"></i>
+                        <p>{{ 'withholding_tax.rules.menu.rules' | trans}}</p>
+                    </a>
+                </div>
+
+                <div class = "col-lg-2 col-md-2 col-xs-6">
+                    <a {% if route starts with 'common_back_withholding_tax_simple_rule' %}
+                        class = "quick-button small merchant-menu-options selected"
+                    {% else %}
+                        class = "quick-button small merchant-menu-options "
+                    {% endif %}
+                            href = "{{ path('common_back_withholding_tax_simple_rule',{'withholdingTaxRuleId':withholdingTaxRule.id}) }}">
+                        <i class = "fa fa-list-ol"></i>
+                        <p>{{ 'withholding_tax.rules.menu.simple_rules'|trans }}
+
+                        </p>
+                    </a>
+                </div>
+
+                <div class = "col-lg-2 col-md-2 col-xs-6">
+                    <a {% if route starts with 'common_back_withholding_tax_hard_rule' %}
+                        class = "quick-button small merchant-menu-options selected"
+                    {% else %}
+                        class = "quick-button small merchant-menu-options "
+                    {% endif %}
+                            href = "{{ path('common_back_withholding_tax_hard_rule',{'withholdingTaxRuleId':withholdingTaxRule.id}) }}">
+                        <i class = "fa fa-th-list"></i>
+                        <p>{{ 'withholding_tax.rules.menu.hard_rules'|trans }}
+
+                        </p>
+                    </a>
+                </div>
+
+                {% if  withholdingTaxRule.taxRegistry %}
+                <div class = "col-lg-2 col-md-2 col-xs-6">
+                    <a {% if route starts with 'common_back_withholding_tax_dynamic_rule_province_rate' %}
+                        class = "quick-button small merchant-menu-options selected"
+                    {% else %}
+                        class = "quick-button small merchant-menu-options "
+                    {% endif %}
+                            href = "{{ path('common_back_withholding_tax_dynamic_rule_province_rate',{'withholdingTaxRuleId':withholdingTaxRule.id}) }}">
+                        <i class = "fa fa-folder"></i>
+                        <p>{{ 'withholding_tax.rules.menu.view_tax_registry'|trans }}
+
+                        </p>
+                    </a>
+                </div>
+                {% endif %}
+
+                <div class = "clearfix"></div>
+            </div>
+        </div>
+    </div><!--/col-->
+
+</div><!--/row-->

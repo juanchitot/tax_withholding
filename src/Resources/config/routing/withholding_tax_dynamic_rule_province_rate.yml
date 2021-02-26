@@ -1,0 +1,15 @@
+common_back_withholding_tax_dynamic_rule_province_rate:
+  path: /
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxDynamicRuleProvinceRate:index
+
+common_back_withholding_tax_dynamic_rule_province_rate_new:
+  path: /new
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxDynamicRuleProvinceRate:new
+
+common_back_withholding_tax_dynamic_rule_province_rate_edit:
+  path: /{dynamicRuleProvinceRateId}
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxDynamicRuleProvinceRate:edit
+
+common_back_withholding_tax_dynamic_rule_province_rate_delete:
+  path: /{dynamicRuleProvinceRateId}/delete
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxDynamicRuleProvinceRate:delete

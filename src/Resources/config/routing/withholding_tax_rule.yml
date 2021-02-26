@@ -1,0 +1,27 @@
+withholding_tax_rule_backoffice_section:
+  path: /
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxRule:index
+
+withholding_tax_rule_backoffice_section_new:
+  path: /new
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxRule:new
+
+withholding_tax_rule_backoffice_section_edit:
+  path: /{withholdingTaxRuleId}
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxRule:edit
+
+withholding_tax_rule_backoffice_section_delete:
+  path: /{withholdingTaxRuleId}/delete
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxRule:delete
+
+common_back_withholding_tax_hard_rule:
+  resource: "@GeoPagosWithholdingTaxBundle/Resources/config/routing/withholding_tax_hard_rule.yml"
+  prefix: /{withholdingTaxRuleId}/hard-rules
+
+common_back_withholding_tax_simple_rule:
+  resource: "@GeoPagosWithholdingTaxBundle/Resources/config/routing/withholding_tax_simple_rule.yml"
+  prefix: /{withholdingTaxRuleId}/simple-rules
+
+common_back_withholding_tax_dynamic_rule_province_rate:
+  resource: "@GeoPagosWithholdingTaxBundle/Resources/config/routing/withholding_tax_dynamic_rule_province_rate.yml"
+  prefix: /{withholdingTaxRuleId}/tax-registry

@@ -1,0 +1,35 @@
+GeoPagos\WithholdingTaxBundle\Entity\Habitual:
+  type: entity
+  table: habituals
+  uniqueConstraints:
+    subsidiary_province_tax_type_unique_idx:
+      columns: [ subsidiary_id, province_id, tax_type]
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    taxType:
+      type: string
+      nullable: false
+      column: tax_type
+    since:
+      type: datetime
+      nullable: false
+  manyToOne:
+    subsidiary:
+      targetEntity: GeoPagos\ApiBundle\Entity\Subsidiary
+      joinColumns:
+        subsidiary_id:
+          referencedColumnName: id
+          nullable: false
+    province:
+      targetEntity: GeoPagos\ApiBundle\Entity\Province
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+          nullable: true
+

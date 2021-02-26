@@ -1,0 +1,51 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxHardRule:
+  type: entity
+  table: withholding_tax_hard_rule
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxHardRuleRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    rate:
+      column: rate
+      type: string
+      nullable: true
+      length: 64
+      fixed: false
+    rule:
+      column: rule
+      type: text
+      nullable: true
+    verificationDate:
+      column: verification_date
+      type: string
+      length: 250
+      fixed: false
+      nullable: true
+    modifiedAt:
+      type: datetime
+      nullable: true
+      column: modified_at
+    createdAt:
+      type: datetime
+      nullable: true
+      column: created_at
+    minimunAmount:
+      column: minimum_amount
+      type: decimal
+      precision: 10
+      options:
+        default: 0
+  manyToOne:
+    withholdingTaxRule:
+      targetEntity: WithholdingTaxRule
+      fetch: LAZY
+      joinColumns:
+        withholding_tax_rule_id:
+          referencedColumnName: id
+          nullable: false
+      orphanRemoval: false

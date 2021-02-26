@@ -1,0 +1,39 @@
+<div class="col-sm-12 mt-1">
+    <strong class="text-muted">
+        {{ 'withholding_tax.v2.rules.info.rate_for_habituals' | trans }}:
+    </strong>
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>{{ 'withholding_tax.v2.rules.info.minimum_transactions' | trans }}</th>
+                <th class="text-center">{{ 'withholding_tax.v2.rules.info.limit' | trans }}</th>
+                <th class="text-center">{{ 'withholding_tax.v2.rules.info.minimum_amount' | trans }}</th>
+                <th class="text-right">%</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for rateForHabitual in ratesForHabituals %}
+            <tr>
+                <td>{{ rateForHabitual.minimumTransactions  }}</td>
+                <td class="text-center">
+                    {% if rateForHabitual.limit > 0 %}
+                        {{ '$' ~ rateForHabitual.limit }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    {% if rateForHabitual.minimumAmount > 0 %}
+                        {{ '$' ~ rateForHabitual.minimumAmount }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td class="text-right"><strong>{{ rateForHabitual.rate ~ '%' }}</strong></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

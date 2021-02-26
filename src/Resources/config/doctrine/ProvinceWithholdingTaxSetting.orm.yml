@@ -1,0 +1,90 @@
+GeoPagos\WithholdingTaxBundle\Entity\ProvinceWithholdingTaxSetting:
+  type: entity
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\ProvinceWithholdingTaxSettingRepository
+  table: province_withholding_tax_setting
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    withholdingTaxType:
+      type: string
+      length: 10
+      nullable: false
+      column: withholding_tax_type
+      options:
+        default: 'TAX'
+    withholdingTaxSystem:
+      column: withholding_tax_system
+      type: string
+      length: 200
+      fixed: false
+      nullable: false
+    type:
+      column: type
+      type: string
+      length: 3
+      fixed: true
+      nullable: true
+    code:
+      column: code
+      type: string
+      length: 3
+      fixed: true
+      nullable: true
+    lastCertificate:
+      column: last_certificate
+      type: integer
+      length: 12
+      unsigned: false
+      nullable: false
+    lastPeriodLastCertificate:
+      column: last_period_last_certificate
+      type: integer
+      length: 12
+      unsigned: false
+      nullable: false
+      options:
+        default: 0
+    lastPeriodStartDate:
+      type: datetime
+      nullable: true
+      column: last_period_start_date
+    period:
+      column: period
+      type: string
+      length: 200
+      fixed: false
+      nullable: false
+    minAmount:
+      column: min_amount
+      type: decimal
+      precision: 12
+      scale: 2
+      options:
+        default: 0
+    resolution:
+      column: resolution
+      type: string
+      length: 200
+      fixed: false
+      nullable: true
+    number:
+      type: string
+      length: 40
+      column: number
+      fixed: false
+      nullable: true
+  oneToOne:
+    province:
+      targetEntity:  GeoPagos\ApiBundle\Entity\Province
+      inversedBy: provinceWithholdingTaxSetting
+      fetch: LAZY
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+          nullable: false
+      orphanRemoval: false

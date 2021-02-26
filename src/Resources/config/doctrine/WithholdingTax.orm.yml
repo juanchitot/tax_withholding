@@ -1,0 +1,91 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTax:
+  type: entity
+  table: withholding_tax
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    type:
+      column: type
+      type: string
+      length: 10
+      nullable: false
+      options:
+        default: 'TAX'
+    paymentType:
+      column: payment_type
+      type: string
+      length: 10
+      nullable: true
+    certificateNumber:
+      column: certificate_number
+      type: bigint
+      nullable: true
+    date:
+      column: date
+      type: date
+      nullable: false
+    taxableIncome:
+      column: taxable_income
+      type: decimal
+      precision: 12
+      scale: 2
+      options:
+        default: 0
+    status:
+      column: status
+      type: string
+      length: 30
+      nullable: false
+    rate:
+      column: rate
+      type: decimal
+      precision: 6
+      scale: 5
+      options:
+        default: 0
+    amount:
+      column: amount
+      type: decimal
+      precision: 12
+      scale: 2
+      options:
+        default: 0
+    file:
+      column: file
+      type: string
+      length: 255
+      nullable: true
+  manyToOne:
+    subsidiary:
+      targetEntity:  GeoPagos\ApiBundle\Entity\Subsidiary
+      joinColumns:
+        subsidiary_id:
+          referencedColumnName: id
+    province:
+      targetEntity:  GeoPagos\ApiBundle\Entity\Province
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+          nullable: true
+    taxCategory:
+      targetEntity: GeoPagos\ApiBundle\Entity\TaxCategory
+      joinColumn:
+        name: tax_category_id
+        referencedColumnName: id
+    taxCondition:
+      targetEntity: GeoPagos\ApiBundle\Entity\TaxCondition
+      joinColumn:
+        name: tax_condition_id
+        referencedColumnName: id
+    certificate:
+      targetEntity: GeoPagos\WithholdingTaxBundle\Entity\Certificate
+      inversedBy: getWithholdingTaxes
+      joinColumn:
+        name: certificate_id
+        referencedColumnName: id

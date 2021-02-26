@@ -1,0 +1,24 @@
+common_back_withholding_tax_certificates:
+  path: /{merchant_id}
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxCertificates:index
+  methods: GET
+
+common_back_withholding_tax_certificates_list:
+  path: /{merchant_id}/list
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxCertificates:listWithholdingTaxCertificates
+  methods: GET
+
+common_back_withholding_tax_certificates_download:
+  path: /{certificate_id}/download
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxCertificates:downloadCertificate
+  methods: GET
+
+common_back_withholding_tax_certificates_view:
+  path: /{certificate_id}/view
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxCertificates:viewCertificate
+  methods: GET
+
+common_back_withholding_tax_certificates_download_zip:
+  path: /{merchant_id}/download-zip
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxCertificates:downloadZip
+  methods: GET

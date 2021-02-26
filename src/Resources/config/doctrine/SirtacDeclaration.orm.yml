@@ -1,0 +1,96 @@
+GeoPagos\WithholdingTaxBundle\Entity\SirtacDeclaration:
+  type: entity
+  table: sirtac_declaration
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\SirtacDeclarationRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    controlNumber:
+      column: control_number
+      type: integer
+      unsigned: false
+      nullable: false
+    settlementDate:
+      column: settlement_date
+      type: date
+      nullable: false
+    withholdingDate:
+      column: withholding_date
+      type: date
+      nullable: false
+    certificateNumber:
+      column: certificate_number
+      type: integer
+      unsigned: false
+      nullable: true
+    settlementNumber:
+      column: settlement_number
+      type: integer
+      unsigned: false
+      nullable: false
+    taxableIncome:
+      column: taxable_income
+      type: decimal
+      precision: 12
+      scale: 2
+    rate:
+      column: rate
+      type: decimal
+      precision: 6
+      scale: 5
+    amount:
+      column: amount
+      type: decimal
+      precision: 12
+      scale: 2
+    status:
+      column: status
+      type: string
+      length: 30
+      nullable: false
+    salesCount:
+      column: sales_count
+      type: integer
+      unsigned: false
+      nullable: true
+    provinceJurisdiction:
+      column: province_jurisdiction
+      type: integer
+      unsigned: false
+      nullable: true
+  manyToOne:
+    subsidiary:
+      targetEntity: GeoPagos\ApiBundle\Entity\Subsidiary
+      joinColumns:
+        subsidiary_id:
+          referencedColumnName: id
+          nullable: false
+    province:
+      targetEntity: GeoPagos\ApiBundle\Entity\Province
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+          nullable: false
+    taxCategory:
+      targetEntity: GeoPagos\ApiBundle\Entity\TaxCategory
+      joinColumn:
+        name: tax_category_id
+        referencedColumnName: id
+        nullable: false
+    certificate:
+      targetEntity: GeoPagos\WithholdingTaxBundle\Entity\Certificate
+      joinColumn:
+        name: certificate_id
+        referencedColumnName: id
+        nullable: false
+    taxConcept:
+      targetEntity: GeoPagos\WithholdingTaxBundle\Entity\TaxConcept
+      joinColumn:
+        name: tax_concept_id
+        referencedColumnName: id
+        nullable: false

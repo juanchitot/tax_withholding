@@ -1,0 +1,47 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxLog:
+  type: entity
+  table: withholding_tax_log
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+    ruleApplied:
+      type: string
+      column: rule_applied
+      nullable: false
+  oneToOne:
+    transaction:
+      targetEntity: GeoPagos\ApiBundle\Entity\Transaction
+      joinColumns:
+        transaction_id:
+          referencedColumnName: id
+    taxDetail:
+      targetEntity: WithholdingTaxDetail
+      joinColumns:
+        tax_detail_id:
+          referencedColumnName: id
+  manyToOne:
+    taxCategory:
+      targetEntity: GeoPagos\ApiBundle\Entity\TaxCategory
+      joinColumn:
+        name: tax_category_id
+        referencedColumnName: id
+    taxCondition:
+      targetEntity: GeoPagos\ApiBundle\Entity\TaxCondition
+      joinColumn:
+        name: tax_condition_id
+        referencedColumnName: id
+    province:
+      targetEntity: GeoPagos\ApiBundle\Entity\Province
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+

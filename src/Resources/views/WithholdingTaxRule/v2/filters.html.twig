@@ -1,0 +1,35 @@
+<div class="col-sm-6 col-md-3">
+    <div class="form-group">
+        <label for="tax-type-select">{{ 'withholding_tax.v2.rules.filters.tax_type' | trans }}:</label>
+        <select id="tax-type-select" class="form-control input-sm not-selectize">
+            <option value="0" selected>{{ 'withholding_tax.v2.rules.filters.tax_type_all' | trans }}</option>
+            <option value="{{ 'withholding_tax.v2.rules.filters.tax_type_federal' | trans }}">
+                {{ 'withholding_tax.v2.rules.filters.tax_type_federal' | trans }}
+            </option>
+            <option value="{{ 'withholding_tax.v2.rules.filters.tax_type_province' | trans }}">
+                {{ 'withholding_tax.v2.rules.filters.tax_type_province' | trans }}
+            </option>
+        </select>
+    </div>
+</div>
+<div class="col-sm-6 col-md-3">
+    <div class="form-group">
+        <label for="province-select">{{ 'withholding_tax.v2.rules.filters.province' | trans }}:</label>
+        <select id="province-select" class="form-control input-sm not-selectize">
+            <option value="0" selected>{{ 'withholding_tax.v2.rules.filters.province_all' | trans }}</option>
+            {% for provinceId, provinceName in enabledProvinces %}
+                <option value="{{ provinceId }}">{{ provinceName | title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<div class="col-sm-12 col-md-4 col-md-offset-2">
+    <div class="form-group">
+        <label for="search-input">&nbsp;</label>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fas fa-search"></i></div>
+            <input type="text" class="form-control" id="search-input"
+                   placeholder="{{ 'withholding_tax.v2.rules.filters.search_criteria' | trans }}">
+        </div>
+    </div>
+</div>

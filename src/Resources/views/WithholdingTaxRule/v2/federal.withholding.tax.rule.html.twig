@@ -1,0 +1,39 @@
+<div class="col-sm-{{ columnWidth }}">
+    <div class="panel panel-info">
+        <div class="panel-heading" data-province-id="0"
+             data-tax-type="{{ 'withholding_tax.v2.rules.filters.tax_type_federal' | trans }}">
+            <strong>{{ ruleDto.taxType| trans }}</strong>
+            <span class="pull-right">{{ 'withholding_tax.v2.rules.filters.tax_type_federal' |trans }}</span>
+        </div>
+        <div class="panel-body small-font no-gutter">
+            <div class="col-sm-12">
+                {{ 'withholding_tax.v2.rules.info.calculation_basis' | trans }}:&nbsp;
+                <strong>{{ ruleDto.calculationBasis }}</strong>
+            </div>
+            {% if ruleDto.excludedRates | length %}
+                {{
+                    include(
+                        '@GeoPagosWithholdingTax/WithholdingTaxRule/v2/excluded.rates.html.twig',
+                        {'excludedRates': ruleDto.excludedRates, 'isFederal': true }
+                    )
+                }}
+            {% endif %}
+            {% if ruleDto.ratesByCondition | length %}
+                {{
+                    include(
+                        '@GeoPagosWithholdingTax/WithholdingTaxRule/v2/rates.by.condition.table.html.twig',
+                        {'ratesByCondition': ruleDto.ratesByCondition }
+                    )
+                }}
+            {% endif %}
+            {% if ruleDto.ratesForHabituals | length %}
+                {{
+                include(
+                    '@GeoPagosWithholdingTax/WithholdingTaxRule/v2/rates.for.habituals.table.html.twig',
+                    {'ratesForHabituals': ruleDto.ratesForHabituals}
+                )
+                }}
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="col-sm-{{ columnWidth }}">
+    <div class="panel panel-grey">
+        <div class="panel-heading" data-province-id="{{ ruleDto.provinceId }}"
+             data-tax-type="{{ 'withholding_tax.v2.rules.filters.tax_type_province' | trans }}">
+            <strong>{{ ruleDto.taxType| trans }}</strong> - <strong>{{ ruleDto.provinceName | title }}</strong>
+            <span class="pull-right">{{ 'withholding_tax.v2.rules.filters.tax_type_province' | trans }}</span>
+        </div>
+        <div class="panel-body small-font no-gutter">
+            <div class="col-sm-12">
+                {{ 'withholding_tax.v2.rules.info.calculation_basis' | trans }}:&nbsp;
+                <strong>{{ ruleDto.calculationBasis }}</strong>
+            </div>
+            <div class="col-sm-12 no-gutter mt-0-5">
+                <div class="col-sm-4 text-left">
+                    {{ 'withholding_tax.v2.rules.info.has_tax_registry' | trans }}:&nbsp;
+                    <strong>
+                        {% if ruleDto.hasTaxRegistry > 0 %}
+                            {{ 'withholding_tax.v2.rules.info.yes' | trans }}
+                        {% else %}
+                            {{ 'withholding_tax.v2.rules.info.no' | trans }}
+                        {% endif %}
+                    </strong>
+                </div>
+                <div class="col-sm-4 text-center">
+                    {{ 'withholding_tax.v2.rules.info.percentage_without_registry' | trans }}:&nbsp;
+                    <strong>
+                        {% if ruleDto.unpublishedRate > 0 %}
+                            {{ ruleDto.unpublishedRate ~ '%' }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </strong>
+                </div>
+                <div class="col-sm-4 text-right">
+                    {{ 'withholding_tax.v2.rules.info.minimum_amount_with_registry' | trans }}:&nbsp;
+                    <strong>
+                        {% if ruleDto.publishedMinimumAmount > 0 %}
+                            {{ '$' ~ ruleDto.publishedMinimumAmount }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </strong>
+                </div>
+            </div>
+            {% if ruleDto.excludedRates | length %}
+                {{
+                    include(
+                        '@GeoPagosWithholdingTax/WithholdingTaxRule/v2/excluded.rates.html.twig',
+                        {'excludedRates': ruleDto.excludedRates, 'isFederal': false }
+                    )
+                }}
+            {% endif %}
+            {% if ruleDto.ratesByCategory | length %}
+                {{
+                    include(
+                        '@GeoPagosWithholdingTax/WithholdingTaxRule/v2/rates.by.category.table.html.twig',
+                        {'ratesByCategory': ruleDto.ratesByCategory }
+                    )
+                }}
+            {% endif %}
+            {% if ruleDto.ratesForHabituals | length %}
+                {{
+                    include(
+                        '@GeoPagosWithholdingTax/WithholdingTaxRule/v2/rates.for.habituals.table.html.twig',
+                        {'ratesForHabituals': ruleDto.ratesForHabituals}
+                    )
+                }}
+            {% endif %}
+        </div>
+    </div>
+</div>

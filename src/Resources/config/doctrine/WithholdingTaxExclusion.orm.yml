@@ -1,0 +1,35 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxExclusion:
+  type: entity
+  table: withholding_tax_exclusion
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxExclusionRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    dateFrom:
+      column: date_from
+      type: date
+      nullable: true
+    dateTo:
+      column: date_to
+      type: date
+      nullable: true
+    file:
+      column: file
+      type: string
+      length: 255
+      nullable: true
+  oneToOne:
+    subsidiary:
+      targetEntity: GeoPagos\ApiBundle\Entity\Subsidiary
+      inversedBy: withholdingTaxExclusion
+      fetch: LAZY
+      joinColumns:
+        subsidiary_id:
+          referencedColumnName: id
+          nullable: false
+      orphanRemoval: false

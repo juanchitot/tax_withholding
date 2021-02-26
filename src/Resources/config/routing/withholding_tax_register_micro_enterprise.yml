@@ -1,0 +1,13 @@
+withholding_tax_register_micro_enterprise_index:
+  path: /
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxRegisterMicroEnterprise:index
+  methods: GET
+
+withholding_tax_register_micro_enterprise_new:
+  path: /new
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxRegisterMicroEnterprise:new
+
+withholding_tax_register_micro_enterprise_delete:
+  path: /{id}/delete
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxRegisterMicroEnterprise:delete
+

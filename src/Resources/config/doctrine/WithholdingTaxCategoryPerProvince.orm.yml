@@ -1,0 +1,58 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxCategoryPerProvince:
+  type: entity
+  table: withholding_tax_category_per_province
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    withholdingTaxNumber:
+      type: string
+      length: 40
+      column: withholding_tax_number
+      fixed: false
+      nullable: true
+    withholdingTaxFile:
+        column: withholding_tax_file
+        type: string
+        length: 255
+        nullable: true
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+    updatedAt:
+      type: datetime
+      nullable: true
+      column: updated_at
+  manyToOne:
+    subsidiary:
+      targetEntity: GeoPagos\ApiBundle\Entity\Subsidiary
+      inversedBy: withholdingTaxCategoriesPerProvince
+      joinColumns:
+        subsidiary_id:
+          referencedColumnName: id
+          nullable: false
+    province:
+      targetEntity: GeoPagos\ApiBundle\Entity\Province
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+          nullable: false
+      orphanRemoval: false
+    taxCategory:
+      targetEntity: GeoPagos\ApiBundle\Entity\TaxCategory
+      joinColumns:
+        tax_category_id:
+          referencedColumnName: id
+          nullable: false
+      orphanRemoval: false
+  uniqueConstraints:
+    subsidiary_province_idx:
+      columns: [ subsidiary_id, province_id ]
+  lifecycleCallbacks:
+    prePersist: ['onPrePersist']
+    preUpdate: ['onPreUpdate']

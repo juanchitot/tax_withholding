@@ -1,0 +1,40 @@
+{% extends 'GeoPagosCommonBackBundle:Layout:layout.html.twig' %}
+
+{% block page_stylesheets %}
+    <style type="text/css">
+        label[for*=merchant_type] {
+            padding-left: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% include 'GeoPagosCommonBackBundle:Common:messages.html.twig' %}
+
+    {{ form_start(form, {
+        'action': path('common_back_withholding_tax_dynamic_rule_province_rate_edit',{'dynamicRuleProvinceRateId':dynamic_rule_province_rate.id,'withholdingTaxRuleId': withholdingTaxRule.id}),
+        'attr': {'class': 'form-horizontal', 'id': 'wt_rule'
+        }}) }}
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2><strong>{{ 'withholding_tax.simple_rules.edit.title'|trans }}</strong></h2>
+                </div>
+
+                <div class="panel-body">
+                    {% include 'GeoPagosWithholdingTaxBundle:WithholdingTaxDynamicRuleProvinceRate:body.html.twig' %}
+                </div>
+
+            </div>
+            {% include 'GeoPagosWithholdingTaxBundle:WithholdingTaxDynamicRuleProvinceRate:edit_buttons.html.twig' with {
+                'submitLabel':'merchant.buttons.save.edit.title'|trans
+            } %}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

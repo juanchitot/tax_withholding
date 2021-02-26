@@ -1,0 +1,65 @@
+GeoPagos\WithholdingTaxBundle\Entity\WithholdingTaxDynamicRule:
+  type: entity
+  table: withholding_tax_dynamic_rule
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxDynamicRuleRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    idFiscal:
+      type: string
+      nullable: true
+      length: 11
+      options:
+        fixed: false
+      column: id_fiscal
+    monthYear:
+      type: string
+      nullable: true
+      length: 7
+      options:
+        fixed: false
+      column: month_year
+    rate:
+      column: rate
+      type: string
+      nullable: true
+      length: 64
+      fixed: false
+    createdAt:
+      type: datetime
+      nullable: true
+      column: created_at
+    taxType:
+      type: binary
+      nullable: false
+      column: tax_type
+    statusJurisdictions:
+      column: status_jurisdictions
+      type: string
+      nullable: true
+      length: 24
+      fixed: false
+    crc:
+      column: crc
+      type: integer
+      nullable: true
+  manyToOne:
+    province:
+      targetEntity:  GeoPagos\ApiBundle\Entity\Province
+      fetch: LAZY
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  oneToOne:
+    provincesGroup:
+      targetEntity: GeoPagos\WithholdingTaxBundle\Entity\TaxRuleProvincesGroup
+      joinColumn:
+        nullable: true
+        name: provinces_group_id
+        referencedColumnName: id

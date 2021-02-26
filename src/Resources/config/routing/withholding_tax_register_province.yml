@@ -1,0 +1,12 @@
+withholding_tax_register_province_backoffice_section:
+  path: /
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxRegisterProvince:index
+  methods: GET
+
+withholding_tax_register_province_new_backoffice_section:
+  path: /new
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxRegisterProvince:new
+
+withholding_tax_register_province_backoffice_section_delete:
+  path: /{id}/delete
+  controller: GeoPagosWithholdingTaxBundle:WithholdingTaxRegisterProvince:delete

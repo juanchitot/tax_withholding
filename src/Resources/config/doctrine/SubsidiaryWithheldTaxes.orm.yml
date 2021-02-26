@@ -1,0 +1,37 @@
+GeoPagos\WithholdingTaxBundle\Entity\SubsidiaryWithheldTaxes:
+  type: entity
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\SubsidiaryWithheldTaxesRepository
+  table: subsidiary_withheld_taxes
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    vatLastWithheld:
+      type: datetime
+      nullable: true
+      column: vat_last_withheld
+    earningsTaxLastWithheld:
+      type: datetime
+      nullable: true
+      column: earnings_tax_last_withheld
+    grossIncomeTaxLastWithheld:
+      type: datetime
+      nullable: true
+      column: gross_income_tax_last_withheld
+    sirtacTaxLastWithheld:
+      type: datetime
+      nullable: true
+      column: sirtac_tax_last_withheld
+      options:
+        default: null
+  oneToOne:
+    subsidiary:
+      targetEntity: GeoPagos\ApiBundle\Entity\Subsidiary
+      cascade: [ "persist" ]
+      joinColumns:
+        subsidiary_id:
+          referencedColumnName: id

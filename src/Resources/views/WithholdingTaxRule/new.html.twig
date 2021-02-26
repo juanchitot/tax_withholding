@@ -1,0 +1,34 @@
+{% extends 'GeoPagosCommonBackBundle:Layout:layout.html.twig' %}
+
+{% block content %}
+
+
+    <div class="row">
+        {% include 'GeoPagosCommonBackBundle:Common:messages.html.twig' %}
+        {{ form_errors(form,{'flashMessage':1}) }}
+
+        {{ form_start(form, {
+            'action': path('withholding_tax_rule_backoffice_section_new'),
+            'attr': {'class': 'form-horizontal', 'id': 'wt_rule'
+            }}) }}
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2><strong>{{ 'withholding_tax.rules.new.title'|trans }}</strong></h2>
+                </div>
+
+                <div class="panel-body">
+                    {% include 'GeoPagosWithholdingTaxBundle:WithholdingTaxRule:body.html.twig' %}
+                </div>
+                {{ form_end(form) }}
+
+                {% include 'GeoPagosWithholdingTaxBundle:WithholdingTaxRule:edit_buttons.html.twig' with {
+                    'submitLabel':'merchant.buttons.save.new.title'|trans
+                } %}
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

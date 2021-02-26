@@ -1,0 +1,29 @@
+{
+  "name": "geopagos/tax-withholding",
+  "description": "Withholding Module",
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "GeoPagos\\WithholdingTaxBundle\\": "src",
+      "GeoPagos\\WithholdingTaxBundle\\Tests\\": "tests"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GeoPagos\\WithholdingTaxBundle\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "recipe-manifest": {
+      "bundles": {
+        "GeoPagos\\WithholdingTaxBundle\\GeoPagosWithholdingTaxBundle": [
+          "all"
+        ]
+      },    
+	    "copy-from-package": {
+	     "src/Factories/": "%TESTS_DIR%/Factories/",
+         "tests/": "%TESTS_DIR%/Bundles/GeoPagosWithholdingTaxBundle/"
+	    }
+    }
+  }
+}

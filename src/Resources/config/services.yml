@@ -1,0 +1,137 @@
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: true
+
+  GeoPagos\WithholdingTaxBundle\:
+    resource: '../../*'
+    exclude: '../../{DependencyInjection,Entity,Migrations,Tests,Factories,Helper,Services,Events,EventSubscriber,Model,Adapter,Contract,Repository/Filters,Exceptions}'
+
+  geopagos_api.withholding_tax_service: '@GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\WithholdingTaxService'
+
+  anti-corruption.withholding_tax_details_service: '@GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\WithholdingTaxDetailService'
+
+  GeoPagos\WithholdingTaxBundle\EventSubscriber\AddWithholdingSidebarMenuItemsSubscriber:
+    autowire: true
+    tags:
+      - { name: kernel.event_listener, event: sonata.block.event.sidebar_menu_item.render, method: onBlock, priority: 1 }
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\WithholdingTaxService:
+    autowire: true
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\WithholdingTaxDetailService:
+    autowire: true
+
+  GeoPagos\WithholdingTaxBundle\EventListener\SubsidiaryTaxInformationUpdateListener:
+    autowire: true
+    tags:
+      - { name: kernel.event_listener, event: identity_checker.tax_information_requested, method: onTaxInformationRequested , priority: 10 }
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\HabitualsService:
+    autowire: true
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\WithholdingTaxSettingsService:
+    autowire: true
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\ManageRegisterByProvinceService:
+    bind:
+      $filesystem: "@public_filesystem"
+
+  GeoPagos\WithholdingTaxBundle\Repository\Strategy\WithholdingTaxGenerationStrategy:
+    class: 'GeoPagos\WithholdingTaxBundle\Repository\Strategy\UseTransactionAvailableDateStrategy'
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\WithholdingTaxCreator:
+    autowire: true
+
+  GeoPagos\WithholdingTaxBundle\Services\Emails\Builder\WithholdingTaxCertificateEmailBuilder:
+    autowire: true
+
+  GeoPagos\WithholdingTaxBundle\Services\Emails\Builder\WithholdingTaxCertificateBuilder:
+    autowire: true
+
+  GeoPagos\WithholdingTaxBundle\Services\Emails\Builder\WithholdingTaxCertificateBuilderInterface:
+    class: 'GeoPagos\WithholdingTaxBundle\Services\Emails\Builder\WithholdingTaxCertificateBuilder'
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\ProvinceCertificateGenerator:
+    autowire: true
+    bind:
+      $filesystem: '@grouper_sftp_filesystem'
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\SubsidiaryCertificateGenerator:
+    bind:
+      $emailBuilder: '@GeoPagos\WithholdingTaxBundle\Services\Emails\Builder\WithholdingTaxCertificateEmailBuilder'
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\CreateCertificate:
+    bind:
+      $filesystem: '@public_filesystem'
+
+  GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxDynamicRuleRepository:
+    autowire: true
+    autoconfigure: true
+
+  GeoPagos\WithholdingTaxBundle\Repository\WithholdingTaxRepository:
+    autowire: true
+
+  GeoPagos\WithholdingTaxBundle\Controller\WithholdingTaxCertificatesController:
+    bind:
+      $filesystem: '@public_filesystem'
+
+  GeoPagos\WithholdingTaxBundle\Form\Transformer\DateToPeriodTransformer:
+    autowire: true
+    autoconfigure: true
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\TaxingProvinceResolution:
+    autowire: true
+
+  GeoPagos\WithholdingTaxBundle\Repository\Filters\RuleEnabledFilter:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  GeoPagos\WithholdingTaxBundle\Adapter\TaxInformationAdapter:
+    autowire: true
+    autoconfigure: true
+
+  GeoPagos\WithholdingTaxBundle\Adapter\WithholdingTaxRequested\WithholdingTaxRequestedAdapterCreator:
+    autowire: true
+    autoconfigure: true
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\WithholdingPipeFactory: ~
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\WithholdingProcessPipe:
+    class: GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\WithholdingProcessPipe
+    factory: '@GeoPagos\WithholdingTaxBundle\Services\WithholdingTax\WithholdingPipeFactory'
+
+  GeoPagos\WithholdingTaxBundle\Services\WithholdStage\IibbWithholdStage: ~
+  GeoPagos\WithholdingTaxBundle\Services\WithholdStage\IvaWithholdStage: ~
+  GeoPagos\WithholdingTaxBundle\Services\WithholdStage\ItbisWithholdStage: ~
+  GeoPagos\WithholdingTaxBundle\Services\WithholdStage\GananciasWithholdStage: ~
+  GeoPagos\WithholdingTaxBundle\Services\WithholdStage\IibbSirtacWithholdStage: ~
+
+  GeoPagos\WithholdingTaxBundle\Services\Rules\RulesFacade:
+    autowire: true
+    autoconfigure: true
+
+  GeoPagos\WithholdingTaxBundle\Model\TaxInformation:
+    autowire: true
+    autoconfigure: true
+
+  GeoPagos\WithholdingTaxBundle\Services\CountryWithholdableTaxes: ~
+  GeoPagos\WithholdingTaxBundle\Services\Certificate\SubsidiaryDataAggregator: ~
+  GeoPagos\WithholdingTaxBundle\Services\Certificate\Subsidiary\BuilderFactory: ~
+  GeoPagos\WithholdingTaxBundle\Services\Certificate\Subsidiary\Builder: ~
+  ## /* Certificate Groupers */
+  GeoPagos\WithholdingTaxBundle\Services\Certificate\Subsidiary\Grouper\FederalGrouper: ~
+  GeoPagos\WithholdingTaxBundle\Services\Certificate\Subsidiary\Grouper\IibbSirtacGrouper: ~
+  GeoPagos\WithholdingTaxBundle\Services\Certificate\Subsidiary\Grouper\ProvinceGrouper: ~
+  ## /* Certificate MailFormatters*/
+  GeoPagos\WithholdingTaxBundle\Services\Certificate\Subsidiary\Formatter\BaseEmailPdfFormatter:
+    bind:
+      $filesystem: '@public_filesystem'
+  GeoPagos\WithholdingTaxBundle\Services\Certificate\Subsidiary\Formatter\FederalPdfFormatter:
+    bind:
+      $filesystem: '@public_filesystem'
+
+

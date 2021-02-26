@@ -1,0 +1,29 @@
+GeoPagos\WithholdingTaxBundle\Entity\TaxRuleProvincesGroup:
+  type: entity
+  repositoryClass: GeoPagos\WithholdingTaxBundle\Repository\TaxRuleProvincesGroupRepository
+  table: tax_rule_provinces_group
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    name:
+      column: name
+      type: string
+      nullable: false
+      length: 32
+      fixed: false
+
+  oneToMany:
+    groupItems:
+      targetEntity: GeoPagos\WithholdingTaxBundle\Entity\TaxRuleProvincesGroupItem
+      cascade: [ "persist" ]
+      orphanRemoval: true
+      mappedBy: taxRuleProvincesGroup
+      fetch: EAGER
+      joinColumns:
+        id:
+          referencedColumnName: tax_rule_provinces_group_id

@@ -1,0 +1,11 @@
+doctrine:
+  orm:
+    entity_managers:
+      default:
+        filters:
+          enabled_rules:
+            class: 'GeoPagos\WithholdingTaxBundle\Repository\Filters\RuleEnabledFilter'
+            enabled: true
+        dql:
+          string_functions:
+            YEAR: DoctrineExtensions\Query\Mysql\Year

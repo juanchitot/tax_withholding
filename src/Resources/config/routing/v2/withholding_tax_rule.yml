@@ -1,0 +1,3 @@
+withholding_tax_rule_backoffice_section_v2:
+  path: /
+  controller: GeoPagosWithholdingTaxBundle:v2\WithholdingTaxRule:index
