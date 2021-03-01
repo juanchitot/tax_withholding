@@ -22,7 +22,8 @@
       },    
 	    "copy-from-package": {	     
         "tests/": "%TESTS_DIR%/Bundles/GeoPagosWithholdingTaxBundle/",
-        "src/Factories/": "%TESTS_DIR%/Bundles/GeoPagosWithholdingTaxBundle/Factories/"
+        "src/Factories/": "%TESTS_DIR%/Bundles/GeoPagosWithholdingTaxBundle/Factories/",
+        "src/Migrations/": "%MIGRATIONS_DIR%/"
 	    }
     }
   }
