@@ -20,9 +20,9 @@
           "all"
         ]
       },    
-	    "copy-from-package": {
-	     "src/Factories/": "%TESTS_DIR%/Factories/",
-         "tests/": "%TESTS_DIR%/Bundles/GeoPagosWithholdingTaxBundle/"
+	    "copy-from-package": {	     
+        "tests/": "%TESTS_DIR%/Bundles/GeoPagosWithholdingTaxBundle/",
+        "src/Factories/": "%TESTS_DIR%/Bundles/GeoPagosWithholdingTaxBundle/Factories/"
 	    }
     }
   }

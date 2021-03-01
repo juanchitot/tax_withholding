@@ -2,11 +2,11 @@
 
 namespace GeoPagos\WithholdingTaxBundle\Services\WithholdingTax;
 
-use GeoPagos\WithholdingTaxBundle\Model\Tax\Itbis;
 use GeoPagos\ApiBundle\Contracts\ConfigurationManagerInterface;
 use GeoPagos\WithholdingTaxBundle\Contract\WithholdableTaxInterface;
 use GeoPagos\WithholdingTaxBundle\Model\Tax\Ganancias;
 use GeoPagos\WithholdingTaxBundle\Model\Tax\Iibb;
+use GeoPagos\WithholdingTaxBundle\Model\Tax\Itbis;
 use GeoPagos\WithholdingTaxBundle\Model\Tax\Iva;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Contracts\Service\ServiceSubscriberInterface;

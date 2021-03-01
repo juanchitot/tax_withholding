@@ -2,10 +2,10 @@
 
 namespace GeoPagos\WithholdingTaxBundle\Services;
 
-use GeoPagos\WithholdingTaxBundle\Model\Tax\Itbis;
 use GeoPagos\ApiBundle\Contracts\ConfigurationManagerInterface;
 use GeoPagos\WithholdingTaxBundle\Model\Tax\Ganancias;
 use GeoPagos\WithholdingTaxBundle\Model\Tax\Iibb;
+use GeoPagos\WithholdingTaxBundle\Model\Tax\Itbis;
 use GeoPagos\WithholdingTaxBundle\Model\Tax\Iva;
 
 class CountryWithholdableTaxes
