@@ -28,6 +28,6 @@
     }
   },
   "require": {        
-        "geopagos/backend-core-arg-decoupling-vt":"0.0.1"
+        "geopagos/core-tax-withholding-vt":"0.0.1"
   }
 }
