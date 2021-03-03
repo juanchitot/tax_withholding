@@ -26,5 +26,8 @@
         "src/Migrations/": "%MIGRATIONS_DIR%/"
 	    }
     }
+  },
+  "require": {        
+        "geopagos/backend-core-arg-decoupling-vt":"0.0.1"
   }
 }
