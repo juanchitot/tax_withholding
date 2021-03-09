@@ -1,5 +1,5 @@
 require('bootstrap-sass/assets/javascripts/bootstrap.min');
-require('../../../../CommonBackBundle/Resources/assets/js/bootstrap-datepicker.min.js');
+require('bootstrap-datepicker.min.js');
 
 import currentLanguage from './lang';
 $.fn.dataTable.ext.errMode = 'none';
