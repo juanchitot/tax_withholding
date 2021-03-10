@@ -1,0 +1,30 @@
+variables:
+  MYSQL_ROOT_PASSWORD: microFono1
+
+stages:
+  - tests
+
+.base: &base
+  image: localhost:5000/services/baseline-dockerfiles/php:7.2-cli
+#  cache:
+#    key: 'tax-withholding'
+#    paths:
+#      - composer-cache
+#      - vendor
+#      - .ecs-cache
+#  before_script:
+#    - composer config cache-dir composer-cache
+#    - composer clear-cache
+#    - php -d memory_limit=3G /usr/bin/composer install --no-interaction
+
+tests-integration:
+  <<: *base
+  stage: tests
+  services:
+    - mysql:5.6.28
+  variables:
+    DATABASE_URL: mysql://root:microFono1@mysql/$CI_JOB_ID
+  script:
+    - pwd -P
+    - pwd
+    - ls -a ./
